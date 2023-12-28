@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Text-to-Speech{% endblock %}
+
+{% block content %}
+    <h1>Text-to-Speech</h1>
+    <form method="post">
+        <label for="text_to_synthesize">Enter text for synthesis:</label>
+        <textarea id="text_to_synthesize" name="text_to_synthesize" rows="4" cols="50"></textarea>
+        <br>
+        <button type="submit">Synthesize</button>
+    </form>
+    
+    {% if tts_result %}
+        <div>
+            <h2>Result</h2>
+            <p>Text to Synthesize: {{ tts_result.text_to_synthesize }}</p>
+            {% if tts_result.audio_path %}
+                <audio controls>
+                    <source src="{{ tts_result.audio_path }}" type="audio/wav">
+                    Your browser does not support the audio tag.
+                </audio>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
